@@ -4,11 +4,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import demo.autocloseable.DemoAutoCloseable;
+
 public class JavaScratchPad {
 
 	public static void main(String[] args) {
 		jm20211201OperatorPrecedence();
-		rndTypeInference();
+		jeps101TypeInference();
+		try {
+		tryAutoCloseable();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -16,7 +23,7 @@ public class JavaScratchPad {
 		System.out.println(res);
 	}
 	
-	private static void rndTypeInference() {
+	private static void jeps101TypeInference() {
 		
 		class MyList {
 			static <Z> List<Z> nil() {
@@ -41,4 +48,43 @@ public class JavaScratchPad {
 		
 	}
 	
+	private static void tryAutoCloseable() {
+		
+		System.out.println("Throw on Open = false, Throw on Close = false");
+		try (DemoAutoCloseable resource = new DemoAutoCloseable(false, false)) {
+			resource.open();
+		} catch (Exception e) {
+			System.out.println("Catch: " + e.getMessage());
+		} finally {
+			System.out.println("Finally");
+		}
+		
+		System.out.println("Throw on Open = true, Throw on Close = false");
+		try (DemoAutoCloseable resource = new DemoAutoCloseable(true, false)) {
+			resource.open();
+		} catch (Exception e) {
+			System.out.println("Catch: " + e.getMessage());
+		} finally {
+			System.out.println("Finally");
+		}
+		
+		System.out.println("Throw on Open = false, Throw on Close = true");
+		try (DemoAutoCloseable resource = new DemoAutoCloseable(false, true)) {
+			resource.open();
+		} catch (Exception e) {
+			System.out.println("Catch: " + e.getMessage());
+		} finally {
+			System.out.println("Finally");
+		}
+		
+		System.out.println("Throw on Open = true, Throw on Close = true");
+		try (DemoAutoCloseable resource = new DemoAutoCloseable(true, true)) {
+			resource.open();
+		} catch (Exception e) {
+			System.out.println("Catch: " + e.getMessage());
+		} finally {
+			System.out.println("Finally");
+		}
+	}
+
 }
