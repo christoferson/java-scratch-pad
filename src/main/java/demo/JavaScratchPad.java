@@ -53,8 +53,8 @@ public class JavaScratchPad {
 		System.out.println("Throw on Open = false, Throw on Close = false");
 		try (DemoAutoCloseable resource = new DemoAutoCloseable(false, false)) {
 			resource.open();
-		} catch (Exception e) {
-			System.out.println("Catch: " + e.getMessage());
+		} catch (RuntimeException e) {
+			print(e);
 		} finally {
 			System.out.println("Finally");
 		}
@@ -62,8 +62,8 @@ public class JavaScratchPad {
 		System.out.println("Throw on Open = true, Throw on Close = false");
 		try (DemoAutoCloseable resource = new DemoAutoCloseable(true, false)) {
 			resource.open();
-		} catch (Exception e) {
-			System.out.println("Catch: " + e.getMessage());
+		} catch (RuntimeException e) {
+			print(e);
 		} finally {
 			System.out.println("Finally");
 		}
@@ -71,8 +71,8 @@ public class JavaScratchPad {
 		System.out.println("Throw on Open = false, Throw on Close = true");
 		try (DemoAutoCloseable resource = new DemoAutoCloseable(false, true)) {
 			resource.open();
-		} catch (Exception e) {
-			System.out.println("Catch: " + e.getMessage());
+		} catch (RuntimeException e) {
+			print(e);
 		} finally {
 			System.out.println("Finally");
 		}
@@ -80,11 +80,18 @@ public class JavaScratchPad {
 		System.out.println("Throw on Open = true, Throw on Close = true");
 		try (DemoAutoCloseable resource = new DemoAutoCloseable(true, true)) {
 			resource.open();
-		} catch (Exception e) {
-			System.out.println("Catch: " + e.getMessage());
+		} catch (RuntimeException e) {
+			print(e);
 		} finally {
 			System.out.println("Finally");
 		}
+	}
+	
+	private static void print(RuntimeException e) {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Catch: ").append(e.getClass().getCanonicalName()).append("/").append(e.getMessage());
+		builder.append("  Suppresed: ").append(e.getSuppressed().getClass().getCanonicalName()).append("/");
+		System.out.println(builder.toString());
 	}
 
 }
