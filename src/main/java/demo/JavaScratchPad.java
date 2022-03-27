@@ -23,22 +23,24 @@ public class JavaScratchPad {
 		System.out.println(res);
 	}
 	
+	static class MyList {
+		static <Z> List<Z> nil() {
+			return new ArrayList<Z>();
+		}
+		
+		static List<Number> process(List<String> list) {
+			List<Number> nlist = new ArrayList<>();
+			for (String e : list) {
+				nlist.add(new BigDecimal(e).add(BigDecimal.valueOf(2)));
+			}
+			return nlist;
+		}
+		
+	}	
+	
 	private static void jeps101TypeInference() {
 		
-		class MyList {
-			static <Z> List<Z> nil() {
-				return new ArrayList<Z>();
-			}
-			
-			static List<Number> process(List<String> list) {
-				List<Number> nlist = new ArrayList<>();
-				for (String e : list) {
-					nlist.add(new BigDecimal(e).add(BigDecimal.valueOf(2)));
-				}
-				return nlist;
-			}
-			
-		}
+
 		
 		List<String> list = MyList.nil(); // Infer type String
 		list.add("35");
