@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.autocloseable.DemoAutoCloseable;
+import demo.records.DemoRecords;
 
 public class JavaScratchPad {
 
@@ -16,6 +17,7 @@ public class JavaScratchPad {
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 		}
+		tryRecordsNested();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -95,5 +97,14 @@ public class JavaScratchPad {
 		builder.append("  Suppresed: ").append(e.getSuppressed().getClass().getCanonicalName()).append("/");
 		System.out.println(builder.toString());
 	}
-
+	
+	public static void tryRecordsNested() {
+		System.out.println("*** TryRecordsNested");
+		DemoRecords.Description d = new DemoRecords().new Description("ABC");
+		System.out.println(d);
+		DemoRecords.Price p = new DemoRecords.Price(0, 100);
+		System.out.println(p);
+		
+	}
+	
 }
