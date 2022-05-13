@@ -20,6 +20,7 @@ public class JavaScratchPad {
 		}
 		tryRecordsNested();
 		tryRecordsAccessor();
+		tryRecordsConstructor();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -115,5 +116,11 @@ public class JavaScratchPad {
 		System.out.println(period);
 		System.out.println(period.aLength());
 	}
-	
+
+	public static void tryRecordsConstructor() {
+		System.out.println("*** TryRecordsConstructor");
+		Period period = new Period();
+		System.out.println(period);
+		System.out.println(period.aLength());
+	}
 }
