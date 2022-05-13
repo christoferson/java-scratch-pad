@@ -6,6 +6,7 @@ import java.util.List;
 
 import demo.autocloseable.DemoAutoCloseable;
 import demo.records.DemoRecords;
+import demo.records.Period;
 
 public class JavaScratchPad {
 
@@ -18,6 +19,7 @@ public class JavaScratchPad {
 			e.printStackTrace();
 		}
 		tryRecordsNested();
+		tryRecordsAccessor();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -105,6 +107,13 @@ public class JavaScratchPad {
 		DemoRecords.Price p = new DemoRecords.Price(0, 100);
 		System.out.println(p);
 		
+	}
+
+	public static void tryRecordsAccessor() {
+		System.out.println("*** TryRecordsAccessor");
+		Period period = new Period(56);
+		System.out.println(period);
+		System.out.println(period.aLength());
 	}
 	
 }
