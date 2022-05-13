@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.autocloseable.DemoAutoCloseable;
+import demo.interfaces.PreJDK9;
+import demo.interfaces.PreJDK9Impl;
 import demo.records.DemoRecords;
 import demo.records.Period;
 
@@ -21,6 +23,8 @@ public class JavaScratchPad {
 		tryRecordsNested();
 		tryRecordsAccessor();
 		tryRecordsConstructor();
+		
+		tryPrivateInterfaceMethod();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -123,4 +127,12 @@ public class JavaScratchPad {
 		System.out.println(period);
 		System.out.println(period.aLength());
 	}
+	
+	  public static void tryPrivateInterfaceMethod() {
+		  System.out.println("*** TryPrivateInterfaceMethod");
+		    new PreJDK9Impl().f();
+		    PreJDK9.g();
+		    //new ImplJDK9().f();
+		    //JDK9.g();
+		  }
 }
