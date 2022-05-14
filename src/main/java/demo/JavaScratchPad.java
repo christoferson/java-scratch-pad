@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import demo.autocloseable.DemoAutoCloseable;
+import demo.interfaces.PostJDK9;
+import demo.interfaces.PostJDK9Impl;
 import demo.interfaces.PreJDK9;
 import demo.interfaces.PreJDK9Impl;
 import demo.records.DemoRecords;
@@ -128,11 +130,15 @@ public class JavaScratchPad {
 		System.out.println(period.aLength());
 	}
 	
-	  public static void tryPrivateInterfaceMethod() {
-		  System.out.println("*** TryPrivateInterfaceMethod");
-		    new PreJDK9Impl().f();
-		    PreJDK9.g();
-		    //new ImplJDK9().f();
-		    //JDK9.g();
-		  }
+	public static void tryPrivateInterfaceMethod() {
+		System.out.println("*** TryPrivateInterfaceMethod");
+		new PreJDK9Impl().f();
+		new PreJDK9Impl().fd();
+		PreJDK9.g();
+		PreJDK9.fs();
+		new PostJDK9Impl().f();
+		//new PostJDK9Impl().fd(); //private is not visible
+		PostJDK9.g();
+		//PostJDK9.fs(); //private is not visible
+	}
 }
