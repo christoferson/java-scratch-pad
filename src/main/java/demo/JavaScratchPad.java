@@ -11,6 +11,7 @@ import demo.interfaces.PreJDK9;
 import demo.interfaces.PreJDK9Impl;
 import demo.records.DemoRecords;
 import demo.records.Period;
+import demo.sealed.Animal;
 
 public class JavaScratchPad {
 
@@ -27,6 +28,7 @@ public class JavaScratchPad {
 		tryRecordsConstructor();
 		
 		tryPrivateInterfaceMethod();
+		trySealedClass();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -141,4 +143,11 @@ public class JavaScratchPad {
 		PostJDK9.g();
 		//PostJDK9.fs(); //private is not visible
 	}
+
+	public static void trySealedClass() {
+		System.out.println("*** TrySealedClass");
+		Animal animal = new Animal.Lion();
+		System.out.println(animal);
+	}
+	
 }
