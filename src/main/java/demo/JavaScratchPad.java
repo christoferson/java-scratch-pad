@@ -12,6 +12,8 @@ import demo.interfaces.PreJDK9Impl;
 import demo.records.DemoRecords;
 import demo.records.Period;
 import demo.sealed.Animal;
+import demo.sealed.IShape;
+import demo.sealed.IShape.Rectangle;
 
 public class JavaScratchPad {
 
@@ -29,6 +31,7 @@ public class JavaScratchPad {
 		
 		tryPrivateInterfaceMethod();
 		trySealedClass();
+		trySealedInterface();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -148,6 +151,12 @@ public class JavaScratchPad {
 		System.out.println("*** TrySealedClass");
 		Animal animal = new Animal.Lion();
 		System.out.println(animal);
+	}
+
+	public static void trySealedInterface() {
+		System.out.println("*** TrySealedInterface");
+		IShape ishape = new Rectangle();
+		System.out.println(ishape);
 	}
 	
 }
