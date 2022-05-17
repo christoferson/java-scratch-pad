@@ -12,6 +12,8 @@ import demo.interfaces.PreJDK9Impl;
 import demo.records.DemoRecords;
 import demo.records.Period;
 import demo.sealed.Animal;
+import demo.sealed.Antarctica;
+import demo.sealed.IContinent;
 import demo.sealed.IShape;
 import demo.sealed.IShape.Rectangle;
 
@@ -32,6 +34,7 @@ public class JavaScratchPad {
 		tryPrivateInterfaceMethod();
 		trySealedClass();
 		trySealedInterface();
+		trySealedRecord();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -157,6 +160,12 @@ public class JavaScratchPad {
 		System.out.println("*** TrySealedInterface");
 		IShape ishape = new Rectangle();
 		System.out.println(ishape);
+	}
+
+	public static void trySealedRecord() {
+		System.out.println("*** TrySealedRecord");
+		IContinent icontinent = new Antarctica("Antarctica");
+		System.out.println(icontinent);
 	}
 	
 }
