@@ -35,6 +35,8 @@ public class JavaScratchPad {
 		trySealedClass();
 		trySealedInterface();
 		trySealedRecord();
+		
+		tryGetPermittedSubclasses();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -166,6 +168,13 @@ public class JavaScratchPad {
 		System.out.println("*** TrySealedRecord");
 		IContinent icontinent = new Antarctica("Antarctica");
 		System.out.println(icontinent);
+	}
+	
+	public static void tryGetPermittedSubclasses() {
+		System.out.println("*** TryGetPermittedSubclasses");
+		System.out.println(Animal.Lion.class.getPermittedSubclasses());
+		System.out.println(Rectangle.class.getPermittedSubclasses());
+		System.out.println(Antarctica.class.getPermittedSubclasses());
 	}
 	
 }
