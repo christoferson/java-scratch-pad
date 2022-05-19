@@ -2,6 +2,7 @@ package demo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import demo.autocloseable.DemoAutoCloseable;
@@ -172,9 +173,9 @@ public class JavaScratchPad {
 	
 	public static void tryGetPermittedSubclasses() {
 		System.out.println("*** TryGetPermittedSubclasses");
-		System.out.println(Animal.Lion.class.getPermittedSubclasses());
-		System.out.println(Rectangle.class.getPermittedSubclasses());
-		System.out.println(Antarctica.class.getPermittedSubclasses());
+		System.out.println(Arrays.asList(Animal.class.getPermittedSubclasses()));
+		System.out.println(Arrays.asList(IShape.class.getPermittedSubclasses()));
+		System.out.println(Arrays.asList(IContinent.class.getPermittedSubclasses()));
 	}
 	
 }
