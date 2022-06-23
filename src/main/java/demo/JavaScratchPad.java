@@ -17,6 +17,7 @@ import demo.sealed.Antarctica;
 import demo.sealed.IContinent;
 import demo.sealed.IShape;
 import demo.sealed.IShape.Rectangle;
+import demo.string.multiline.Jep378;
 
 public class JavaScratchPad {
 
@@ -38,6 +39,8 @@ public class JavaScratchPad {
 		trySealedRecord();
 		
 		tryGetPermittedSubclasses();
+		
+		tryJep378MultilineText();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -176,6 +179,12 @@ public class JavaScratchPad {
 		System.out.println(Arrays.asList(Animal.class.getPermittedSubclasses()));
 		System.out.println(Arrays.asList(IShape.class.getPermittedSubclasses()));
 		System.out.println(Arrays.asList(IContinent.class.getPermittedSubclasses()));
+	}
+	
+	public static void tryJep378MultilineText() {
+		System.out.println("*** TryJep378MultilineText");
+		System.out.println(Jep378.HTML);
+		System.out.println(Jep378.SQL);
 	}
 	
 }
