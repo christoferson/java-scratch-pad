@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.random.RandomGenerator;
+import java.util.random.RandomGeneratorFactory;
 
 import demo.autocloseable.DemoAutoCloseable;
+import demo.exceptions.Jep358;
 import demo.interfaces.PostJDK9;
 import demo.interfaces.PostJDK9Impl;
 import demo.interfaces.PreJDK9;
@@ -41,6 +44,10 @@ public class JavaScratchPad {
 		tryGetPermittedSubclasses();
 		
 		tryJep378MultilineText();
+		
+		tryJep358BetterNullPointerException();
+	
+		tryRandomGeneratorFactory();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -187,4 +194,16 @@ public class JavaScratchPad {
 		System.out.println(Jep378.SQL);
 	}
 	
+	public static void tryJep358BetterNullPointerException() {
+		System.out.println("*** TryJep358BetterNullPointerException");
+		Jep358.demo();
+	}
+	
+	public static void tryRandomGeneratorFactory() {
+		System.out.println("*** TryRandomGeneratorFactory");
+		RandomGeneratorFactory<RandomGenerator> factory = RandomGeneratorFactory.of("Random");
+		RandomGenerator random = factory.create(100L);
+		System.out.println(random.nextInt(75));
+		System.out.println(random.nextDouble(75));
+	}
 }
