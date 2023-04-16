@@ -3,6 +3,7 @@ package demo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -52,6 +53,7 @@ public class JavaScratchPad {
 	
 		tryRandomGeneratorFactory();
 		tryCharStream();
+		tryCharStreamUsingRecord();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -213,7 +215,7 @@ public class JavaScratchPad {
 	
 	private static void tryCharStream() {
 		String string = """
-		Adfjkgop455oia5435 543u5i43u543 dPjBB SSsA
+		Adfjkgop455oia5435 543u5i43u543 dPjBB SSsA D f GG HH pLK
 		""";
 		
 		// Distinct Characters
@@ -244,5 +246,68 @@ public class JavaScratchPad {
 		.limit(3)
 		.toList();
 		System.out.println(frequencyMaxList);
+		
+		// Map of Occurrence and Characters 
+		Map<Long, List<String>> frequencyCharacterMap = frequencyMap.entrySet().stream()
+		.collect(Collectors.groupingBy(
+				Map.Entry::getValue, 
+				Collectors.mapping(
+						Map.Entry::getKey, 
+						Collectors.toList()
+				)
+		)
+		);
+		System.out.println(frequencyCharacterMap);
+		
+		List<Map.Entry<Long, List<String>>> frequencyCharacterMapDes = frequencyCharacterMap.entrySet().stream()
+		.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+		.toList();
+		System.out.println(frequencyCharacterMapDes);
+	}
+	
+	static record Letter(int codePoint) {
+		Letter(int codePoint) {
+			this.codePoint = Character.toLowerCase(codePoint);
+		}
+	}
+	
+	static record LetterByCount(Letter letter, Long count) {
+		LetterByCount(Map.Entry<Letter, Long> entry) {
+			this(entry.getKey(), entry.getValue());
+		}
+	}
+	
+	private static void tryCharStreamUsingRecord() {
+		String string = """
+		Adfjkgop455oia5435 543u5i43u543 dPjBB SSsA D f GG HH pLK
+		""";
+		
+		
+		// Map of Characters and Occurrence
+		Map<Letter, Long> frequencyMap = string.codePoints()
+		.filter(Character::isAlphabetic)
+		.mapToObj(Letter::new)
+		.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		System.out.println(frequencyMap);
+		
+		// Character with the most occurrence
+		Map.Entry<Letter, Long> frequencyMapMax = frequencyMap.entrySet().stream()
+				.max(Map.Entry.comparingByValue()).orElseThrow();
+		System.out.println(frequencyMapMax);
+		
+		// Character list with the most occurence
+		List<Map.Entry<Letter, Long>> frequencyMaxList = frequencyMap.entrySet().stream()
+		.sorted(Map.Entry.<Letter, Long>comparingByValue().reversed())
+		.limit(3)
+		.toList();
+		System.out.println(frequencyMaxList);
+		/*
+		// Map of Characters and Occurrence
+		Map<Long, Letter> frequencyLetterMap = string.codePoints()
+		.filter(Character::isAlphabetic)
+		.mapToObj(Letter::new)
+		.collect(Collectors.groupingBy(Collectors.counting(), Function.identity()));
+		System.out.println(frequencyLetterMap);
+		*/
 	}
 }
