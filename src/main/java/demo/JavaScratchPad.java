@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
+import java.util.stream.Collectors;
 
 import demo.autocloseable.DemoAutoCloseable;
 import demo.exceptions.Jep358;
@@ -48,6 +51,7 @@ public class JavaScratchPad {
 		tryJep358BetterNullPointerException();
 	
 		tryRandomGeneratorFactory();
+		tryCharStream();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
@@ -205,5 +209,40 @@ public class JavaScratchPad {
 		RandomGenerator random = factory.create(100L);
 		System.out.println(random.nextInt(75));
 		System.out.println(random.nextDouble(75));
+	}
+	
+	private static void tryCharStream() {
+		String string = """
+		Adfjkgop455oia5435 543u5i43u543 dPjBB SSsA
+		""";
+		
+		// Distinct Characters
+		String distinctCharacters = string.codePoints()
+			.filter(Character::isAlphabetic)
+			.map(Character::toLowerCase)
+			.distinct()
+			.mapToObj(Character::toString)
+			.collect(Collectors.joining());
+		System.out.println(distinctCharacters);
+		
+		// Map of Characters and Occurrence
+		Map<String, Long> frequencyMap = string.codePoints()
+		.filter(Character::isAlphabetic)
+		.map(Character::toLowerCase)
+		.mapToObj(Character::toString)
+		.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		System.out.println(frequencyMap);
+		
+		// Character with the most occurrence
+		Map.Entry<String, Long> frequencyMapMax = frequencyMap.entrySet().stream()
+				.max(Map.Entry.comparingByValue()).orElseThrow();
+		System.out.println(frequencyMapMax);
+		
+		// Character list with the most occurence
+		List<Map.Entry<String, Long>> frequencyMaxList = frequencyMap.entrySet().stream()
+		.sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+		.limit(3)
+		.toList();
+		System.out.println(frequencyMaxList);
 	}
 }
