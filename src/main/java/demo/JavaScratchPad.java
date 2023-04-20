@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import demo.autocloseable.DemoAutoCloseable;
 import demo.exceptions.Jep358;
+import demo.functions.DemoFunctionalInterface;
 import demo.interfaces.PostJDK9;
 import demo.interfaces.PostJDK9Impl;
 import demo.interfaces.PreJDK9;
@@ -54,6 +55,8 @@ public class JavaScratchPad {
 		tryRandomGeneratorFactory();
 		tryCharStream();
 		tryCharStreamUsingRecord();
+		
+		DemoFunctionalInterface.demoFunction();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
