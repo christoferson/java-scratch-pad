@@ -56,7 +56,7 @@ public class JavaScratchPad {
 		tryCharStream();
 		tryCharStreamUsingRecord();
 		
-		DemoFunctionalInterface.demoFunction();
+		DemoFunctionalInterface.demo();
 	}
 
 	private static void jm20211201OperatorPrecedence() {
